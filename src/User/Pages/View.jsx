@@ -1,10 +1,12 @@
 // import React from 'react'
 import Header from '../Components/Header'
 import Footer from '../../Components/Footer'
-import { FaBackward, FaEye } from 'react-icons/fa'
+import { FaBackward, FaCamera, FaEye } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 function View() {
+  const [modal,setmodal] = useState(false)
   return (
     <>
       <Header/>
@@ -19,7 +21,7 @@ function View() {
             <div className='col-span-3'>
               <div className='flex justify-between'>
                 <h3 className='font-bold text-2xl'>Title</h3>
-                <button className='text-gray-400'> <FaEye/> </button>
+                <button onClick={()=>setmodal(true)} className='text-gray-400'> <FaEye/> </button>
               </div>
               <h2 className='font-bold text-blue-700 mt-2'>Author</h2>
               <div className='md:grid grid-cols-3 gap-10 my-10'>
@@ -42,7 +44,9 @@ function View() {
           </div>
         </div>
         {/* modal */}
-        <div className='relative z-10 overflow-y-auto'>
+        {
+           modal &&
+            <div onClick={()=>setmodal(false)} className='relative z-10 overflow-y-auto'>
           <div className='bg-gray-500/75 fixed inset-0'>
            <div className='flex justify-center items-center min-h-screen'>
              <div className='bg-white  rounded-2xl  w-100 md:w-250'>
@@ -51,12 +55,21 @@ function View() {
                 <h2> Book Images</h2>
               </div>
               {/* modal body */}
-              
+              <div className='p-5'>
+                <p className='flex items-center text-blue-500'> <FaCamera className='me-3'/> Camera Clicks of the Books</p>
+                <div className='flex flex-wrap my-5'>
+                  {/* duplicate image */}
+                  <img  className="md:w-75 w-35 md:me-2 mb:3 md:mt-0" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJVcU1g21nFe1TAV2hFIpABOCEO74tbHNxIwY0uUfQ2_SblTZ_fH9xCJCb&s=10" alt="viewbook"/>
+
+                </div>
+              </div>
              </div>
            </div>
 
           </div>
         </div>
+        }
+
       </div>
 
       <Footer/>
